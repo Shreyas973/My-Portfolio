@@ -63,10 +63,7 @@ import { motion, AnimatePresence } from 'framer-motion';
     }
   ];
 
- const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
+ 
     return (
  <AnimatePresence>
       {pageLoaded && (
@@ -92,7 +89,7 @@ import { motion, AnimatePresence } from 'framer-motion';
             <div className="flex flex-col md:flex-row items-center justify-between mt-16">
               <div className="md:w-1/2 mb-12 md:mb-0">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  Hi, I'm <span className="text-pink-500">Shreyas S</span> <br />
+                  Hi, I am <span className="text-pink-500">Shreyas S</span> <br />
                   <span className="text-cyan-400">Full Stack Developer</span>
                 </h1>
                 <p className="text-xl text-gray-300 mb-8">

@@ -1,103 +1,232 @@
-import Image from "next/image";
+  'use client'; // Add this directive at the top
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  import Head from 'next/head';
+  import Navbar from '@/components/Navbar';
+  import TabSection from '@/components/TabSection';
+  import ProjectCard from '@/components/ProjectCard';
+  import ContactForm from '@/components/ContactForm';
+import { useState, useEffect } from 'react';
+  import Image from 'next/image';
+  import { FaCode, FaAppStore } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+
+  export default function Portfolio() {
+    const [activeTab, setActiveTab] = useState('skills');
+    const [formSubmitted, setFormSubmitted] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
+
+  useEffect(() => {
+    setPageLoaded(true);
+  }, []);
+
+    const projects = [
+      {
+        id: 1,
+        title: "TradeMyRide",
+        description: "Mobile app for buying and selling vehicles with React Native, featuring smart search filters, image-based listings, and real-time chat.",
+        link: "https://github.com/Shreyas973/TradeMyRide",
+        image: "/images/vehicle.jpeg"
+      },
+      {
+        id: 2,
+        title: "Inventory Management System",
+        description: "Flutter and Firebase app for store owners to manage product stock with real-time inventory tracking and low-stock alerts.",
+        link: "https://github.com/Shreyas973/Inventory-Management-System",
+        image: "/images/inventory.jpg"
+      },
+      {
+        id: 3,
+        title: "Portfolio Website",
+        description: "Modern, responsive portfolio built with Next.js and Tailwind CSS to showcase projects, skills, and passion for development.",
+        link: "#",
+        image: "/images/portfolio.webp"
+      }
+    ];
+
+    const education = [
+    {
+      id: 1,
+      icon: <FaCode />,
+      title: "MCA",
+      institution: "NMAM Institution of Technology, Nitte",
+      period: "2024-26",
+      details: "CGPA: 8.15"
+    },
+    {
+      id: 2,
+      icon: <FaAppStore />,
+      title: "BSC",
+      institution: "SDM College, Ujire",
+      period: "2021-24",
+      details: "CGPA: 7.7"
+    }
+  ];
+
+ const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+    return (
+ <AnimatePresence>
+      {pageLoaded && (
+        <motion.div
+          className="min-h-screen bg-black text-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+        >        <Head>
+          <title>Shreyas S - Portfolio</title>
+          <meta name="description" content="Full Stack Developer Portfolio" />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        </Head>
+
+        {/* Header Section */}
+        <header id="header" className="relative pt-28 pb-20 px-4 md:px-8 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-pink-800 opacity-30 z-0"></div>
+          <div className="container mx-auto relative z-10">
+            <Navbar />
+            
+            <div className="flex flex-col md:flex-row items-center justify-between mt-16">
+              <div className="md:w-1/2 mb-12 md:mb-0">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                  Hi, I'm <span className="text-pink-500">Shreyas S</span> <br />
+                  <span className="text-cyan-400">Full Stack Developer</span>
+                </h1>
+                <p className="text-xl text-gray-300 mb-8">
+                  Turning ideas into reality through code
+                </p>
+                <a 
+                  href="#contact" 
+                  className="bg-pink-600 hover:bg-pink-700 text-white py-3 px-8 rounded-full font-medium transition duration-300 inline-block"
+                >
+                  Get in Touch
+                </a>
+              </div>
+              
+              <div className="md:w-1/2 flex justify-center">
+                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-pink-500 shadow-xl">
+                  <div className="bg-red-200 border-2 border-dashed rounded-full w-full h-full" />
+                  <Image
+                  src="/images/profil.jpg"     
+                  alt="Profile picture"
+                    fill
+    className="rounded-full border-4 border-pink-500"
+  />
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* About Section */}
+        <section id="about" className="py-20 px-4 md:px-8 bg-gray-900">
+          <div className="container mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
+              About <span className="text-pink-500">Me</span>
+            </h2>
+            
+            <div className="flex flex-col md:flex-row gap-12">
+              <div className="md:w-1/3 flex justify-center">
+                <div className="w-64 h-80 rounded-lg overflow-hidden shadow-lg transform transition duration-500 hover:scale-105">
+                  <div className="w-64 h-80 relative rounded-lg overflow-hidden shadow-lg transform transition duration-500 hover:scale-105">
+    <Image
+      src="/images/p2.jpg"
+      alt="Profile picture"
+      fill
+      className="object-cover"
+    />
+  </div>
+
+                </div>
+              </div>
+              
+              <div className="md:w-2/3">
+                <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                  A tech enthusiast with an insatiable curiosity, I thrive on solving complex problems and turning ideas into reality through code. With a solid foundation in Python, Java and hands-on experience in web development, mobile apps, etc. I approach every project as an opportunity to learn, innovate, and grow.
+                </p>
+                
+                <TabSection activeTab={activeTab} setActiveTab={setActiveTab} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Education Section */}
+        <section id="education" className="py-20 px-4 md:px-8">
+          <div className="container mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
+              My <span className="text-pink-500">Education</span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {education.map((edu) => (
+                <div key={edu.id} className="bg-gray-900 rounded-xl p-8 border border-pink-500 relative overflow-hidden transform transition duration-500 hover:scale-105">
+                  <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-500 opacity-10"></div>
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 bg-pink-500 rounded-full flex items-center justify-center mb-6 text-white text-2xl">
+                    {edu.icon}
+                      </div>
+
+                    <h3 className="text-2xl font-bold mb-4">{edu.title}</h3>
+                    <p className="text-gray-300 mb-2">{edu.institution}</p>
+                    <p className="text-gray-300 mb-4">{edu.period}</p>
+                    <p className="text-gray-300">{edu.details}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section id="projects" className="py-20 px-4 md:px-8 bg-gray-900">
+          <div className="container mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
+              My <span className="text-pink-500">Projects</span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />  
+              ))}
+            </div>
+            
+            <div className="text-center mt-12">
+              <a 
+                href="https://github.com/Shreyas973" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-pink-600 hover:bg-pink-700 text-white py-3 px-8 rounded-full font-medium transition duration-300"
+              >
+                See More Projects
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-20 px-4 md:px-8">
+          <div className="container mx-auto max-w-4xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
+              Contact <span className="text-pink-500">Me</span>
+            </h2>
+            
+            <ContactForm formSubmitted={formSubmitted} setFormSubmitted={setFormSubmitted} />
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="py-8 bg-gray-900 text-center text-gray-400">
+          <div className="container mx-auto">
+            <p>Copyright © {new Date().getFullYear()} Shreyas S. All rights reserved.</p>
+          </div>
+        </footer>
+         </motion.div>
+      )}
+    </AnimatePresence>
+    );
+  }

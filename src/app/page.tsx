@@ -1,6 +1,7 @@
   'use client'; // Add this directive at the top
 
   import Head from 'next/head';
+  
   import Navbar from '@/components/Navbar';
   import TabSection from '@/components/TabSection';
   import ProjectCard from '@/components/ProjectCard';
@@ -76,8 +77,7 @@ import { motion, AnimatePresence } from 'framer-motion';
         >        <Head>
           <title>Shreyas S - Portfolio</title>
           <meta name="description" content="Full Stack Developer Portfolio" />
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+          
         </Head>
 
         {/* Header Section */}

@@ -13,16 +13,27 @@ const ContactForm = ({ formSubmitted, setFormSubmitted }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormSubmitted(true);
 
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    const form = new FormData();
+    form.append('name', formData.name);
+    form.append('email', formData.email);
+    form.append('message', formData.message);
 
-    // Hide success after 5s
-    setTimeout(() => setFormSubmitted(false), 5000);
+    try {
+      await fetch('https://script.google.com/macros/s/AKfycby3N5NhYho4IdJ4aNM62iu38gJtS4ML0g_2EEvzQyiB92hbmxmmNVRx6uVQgAcyr2_8/exec', {
+        method: 'POST',
+        body: form
+      });
+
+      setFormSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+
+      setTimeout(() => setFormSubmitted(false), 1000);
+    } catch (error) {
+      console.error('Error submitting to Google Sheet:', error);
+    }
   };
 
   return (
@@ -41,33 +52,22 @@ const ContactForm = ({ formSubmitted, setFormSubmitted }) => {
           </p>
         </div>
 
-        {/* Social Links */}
         <div className="mb-8">
           <h3 className="text-xl font-bold mb-4">Follow Me</h3>
           <div className="flex space-x-4">
-            <a
-              href="https://www.linkedin.com/in/shreyas-s29"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-pink-600 transition"
-            >
+            <a href="https://www.linkedin.com/in/shreyas-s29" target="_blank" rel="noopener noreferrer"
+              className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-pink-600 transition">
               <i className="fab fa-linkedin-in text-xl text-white"></i>
             </a>
-            <a
-              href="https://github.com/Shreyas973"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-pink-600 transition"
-            >
+            <a href="https://github.com/Shreyas973" target="_blank" rel="noopener noreferrer"
+              className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-pink-600 transition">
               <i className="fab fa-github text-xl text-white"></i>
             </a>
           </div>
         </div>
 
-        <a
-          href="/images/resume.pdf"
-          className="inline-block bg-pink-600 hover:bg-pink-700 text-white py-3 px-8 rounded-full font-medium transition duration-300"
-        >
+        <a href="/images/resume.pdf"
+          className="inline-block bg-pink-600 hover:bg-pink-700 text-white py-3 px-8 rounded-full font-medium transition duration-300">
           Download Resume
         </a>
       </div>

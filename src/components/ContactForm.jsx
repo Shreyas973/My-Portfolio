@@ -64,7 +64,7 @@ const ContactForm = ({ formSubmitted, setFormSubmitted }) => {
             </a>
           </div>
         </div>
-        <a href="/images/Shreyas(Resume).pdf"
+        <a href="/images/shreyas(resume).pdf"
           className="inline-block bg-pink-600 hover:bg-pink-700 text-white py-3 px-8 rounded-full font-medium transition duration-300">
           Download Resume
         </a>

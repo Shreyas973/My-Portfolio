@@ -36,10 +36,10 @@ export default function Portfolio() {
     },
     {
       id: 3,
-      title: "Portfolio Website",
-      description: "Modern, responsive portfolio built with Next.js and Tailwind CSS to showcase projects, skills, and passion for development.",
-      link: "#",
-      image: "/images/portfolio.webp"
+      title: "Chat Application",
+      description: "Feature-rich, real-time chat app built with React and Socket.io, featuring live messaging with typing indicators, user authentication, and media sharing.",
+      link: "https://github.com/Shreyas973/Chat-app",
+      image: "/images/chat-app.png"
     }
   ];
 
